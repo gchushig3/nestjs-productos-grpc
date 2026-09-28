@@ -16,7 +16,7 @@ const packageDef = protoLoader.loadSync(PROTO_PATH, {
 });
 
 const proto = grpc.loadPackageDefinition(packageDef).productos;
-const client = new proto.ProductoService('nestjs-productos-grpc.railway.internal:5000', grpc.credentials.createInsecure());
+const client = new proto.ProductoService('nestjs-productos-grpc-production.up.railway.app:5000', grpc.credentials.createInsecure());
 
 console.log('== ObtenerProducto (unary) ==');
 client.obtenerProducto({ id: 1 }, (err, producto) => {
