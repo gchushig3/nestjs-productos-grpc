@@ -9,8 +9,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function bootstrap() {
-  const port = Number(process.env.PORT ?? 5000);
-  const grpcPort = Number(process.env.GRPC_PORT ?? 5001);
+  const port = Number(process.env.PORT || 3000);
+  const grpcPort = Number(process.env.GRPC_PORT || 5001);
 
   const app = await NestFactory.create(AppModule);
   app.enableCors();
