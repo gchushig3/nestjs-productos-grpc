@@ -25,6 +25,23 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Catálogo web
+
+La aplicación sirve una interfaz web en `http://localhost:5000`. El navegador llama a una API HTTP puente y esta consulta por gRPC al microservicio alojado en Railway (`sakura.proxy.rlwy.net:58842` por defecto); así se pueden probar desde la página la búsqueda, el listado y el filtro por precio del servicio.
+
+```bash
+npm install
+npm run start:dev
+```
+
+Rutas HTTP disponibles:
+
+- `GET /api/productos` lista los productos.
+- `GET /api/productos?precioMaximo=50` filtra por precio máximo.
+- `GET /api/productos/1` consulta un producto por ID.
+
+`GRPC_URL` permite cambiar el endpoint gRPC, por ejemplo `localhost:5001` para desarrollo completamente local. `PORT` configura el servidor web y `GRPC_PORT` configura el servidor gRPC local que también inicia esta aplicación. En Railway, el puerto público `58842` es el proxy TCP hacia el puerto interno `8080` del servicio gRPC existente.
+
 ## Project setup
 
 ```bash

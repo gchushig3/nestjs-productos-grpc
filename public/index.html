@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f6f2" />
+    <title>Catálogo | Productos</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Catálogo de productos"><span class="brand-mark">P</span> productos<span class="brand-dot">.</span></a>
+        <span id="service-status" class="service-status"><i></i> Conectando con gRPC…</span>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">CATÁLOGO · GRPC</p>
+        <h1>Lo esencial,<br /><span>bien elegido.</span></h1>
+        <p class="description">Explora los productos disponibles y encuentra el que buscas.</p>
+      </section>
+
+      <section class="toolbar" aria-label="Filtros de productos">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar por nombre o ID" aria-label="Buscar por nombre o ID" /></label>
+        <form id="filter-form" class="price-filter">
+          <label for="price">Precio máximo</label>
+          <span class="price-input"><span>$</span><input id="price" type="number" min="0" step="0.01" placeholder="Sin límite" /></span>
+          <button type="submit">Filtrar <span aria-hidden="true">→</span></button>
+        </form>
+      </section>
+
+      <div class="section-heading"><div><p class="eyebrow">SELECCIÓN ACTUAL</p><h2>Productos <span id="count"></span></h2></div><button id="clear-filter" class="text-button" type="button">Limpiar filtro</button></div>
+      <p id="message" class="message" role="status"></p>
+      <section id="products" class="products" aria-live="polite"></section>
+      <footer><span>Un catálogo pequeño, cosas que sirven.</span><span>PRODUCTOS · 2026</span></footer>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
