@@ -16,7 +16,7 @@ const packageDef = protoLoader.loadSync(PROTO_PATH, {
 });
 
 const proto = grpc.loadPackageDefinition(packageDef).productos;
-const client = new proto.ProductoService('sakura.proxy.rlwy.net:58842', grpc.credentials.createInsecure());
+const client = new proto.ProductoService('reseau.proxy.rlwy.net:34929', grpc.credentials.createInsecure());
 
 console.log('== ObtenerProducto (unary) ==');
 client.obtenerProducto({ id: 1 }, (err, producto) => {

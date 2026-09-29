@@ -17,7 +17,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
         options: {
           package: 'productos',
           protoPath: join(__dirname, 'productos.proto'),
-          url: process.env.GRPC_URL ?? 'sakura.proxy.rlwy.net:58842',
+          url: process.env.GRPC_URL ?? '127.0.0.1:5001',
         },
       },
     ]),
