@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { lastValueFrom, toArray } from 'rxjs';
 import { AppController } from '../src/app.controller.js';
 
 describe('AppController (e2e)', () => {
@@ -21,7 +22,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('should list all products', async () => {
-    const products = await controller.listarProductos().toPromise();
+    const products = await lastValueFrom(controller.listarProductos().pipe(toArray()));
     expect(products).toHaveLength(3);
   });
 });
