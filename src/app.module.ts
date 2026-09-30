@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 import * as grpc from '@grpc/grpc-js';
 import { ProductosHttpController } from './productos-http.controller.js';
 
+const protoPath = join(dirname(fileURLToPath(import.meta.url)), 'productos.proto');
+
 @Module({
   imports: [
     ClientsModule.register([
@@ -13,7 +15,7 @@ import { ProductosHttpController } from './productos-http.controller.js';
         transport: Transport.GRPC,
         options: {
           package: 'productos',
-          protoPath: join(__dirname, 'productos.proto'),
+          protoPath,
           url: process.env.GRPC_URL || 'reseau.proxy.rlwy.net:34929',
           credentials: grpc.credentials.createInsecure(),
         },

@@ -1,16 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { join } from 'path';
-import { AppModule } from './app.module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { GrpcModule } from './grpc.module.js';
 
 async function bootstrap() {
   const port = process.env.GRPC_PORT || 5001;
+  const protoPath = join(dirname(fileURLToPath(import.meta.url)), 'productos.proto');
 
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(GrpcModule, {
     transport: Transport.GRPC,
     options: {
       package: 'productos',
-      protoPath: join(__dirname, 'productos.proto'), // ✅ Usar __dirname nativo
+      protoPath: protoPath,
       url: `0.0.0.0:${port}`,
     },
   });
