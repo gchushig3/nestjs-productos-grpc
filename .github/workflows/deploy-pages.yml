@@ -24,7 +24,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/configure-pages@v5
       - name: Configure gateway URL
         env:
@@ -35,7 +35,7 @@ jobs:
           const url = process.env.API_BASE_URL ?? '';
           await writeFile('public/config.js', `window.API_BASE_URL = ${JSON.stringify(url)};\n`);
           NODE
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: public
       - id: deployment
