@@ -22,6 +22,9 @@
     "test:debug": "vitest --inspect-brk --no-file-parallelism",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "@grpc/grpc-js": "^1.14.5",
     "@grpc/proto-loader": "^0.8.1",
