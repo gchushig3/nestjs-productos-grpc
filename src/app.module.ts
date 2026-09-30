@@ -5,8 +5,6 @@ import { fileURLToPath } from 'node:url';
 import * as grpc from '@grpc/grpc-js';
 import { ProductosHttpController } from './productos-http.controller.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 @Module({
   imports: [
     ClientsModule.register([

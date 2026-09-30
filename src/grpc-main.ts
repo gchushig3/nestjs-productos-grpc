@@ -1,24 +1,21 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { GrpcModule } from './grpc.module.js';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { join } from 'path';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const grpcPort = Number(process.env.GRPC_PORT || 5001);
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(GrpcModule, {
+  const port = process.env.GRPC_PORT || 5001;
+
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.GRPC,
     options: {
       package: 'productos',
-      protoPath: join(__dirname, 'productos.proto'),
-      url: `0.0.0.0:${grpcPort}`,
+      protoPath: join(__dirname, 'productos.proto'), // ✅ Usar __dirname nativo
+      url: `0.0.0.0:${port}`,
     },
   });
 
   await app.listen();
-  console.log(`Microservicio gRPC escuchando en 0.0.0.0:${grpcPort}`);
+  console.log(`Microservicio gRPC activo en 0.0.0.0:${port}`);
 }
-
-void bootstrap();
+bootstrap();
