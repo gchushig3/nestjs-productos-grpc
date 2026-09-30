@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f7f6f2" />
     <title>Catálogo | Productos</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="shell">
       <header class="topbar">
-        <a class="brand" href="/" aria-label="Catálogo de productos"><span class="brand-mark">P</span> productos<span class="brand-dot">.</span></a>
+        <a class="brand" href="./" aria-label="Catálogo de productos"><span class="brand-mark">P</span> productos<span class="brand-dot">.</span></a>
         <span id="service-status" class="service-status"><i></i> Conectando con gRPC…</span>
       </header>
 
@@ -34,6 +34,7 @@
       <section id="products" class="products" aria-live="polite"></section>
       <footer><span>Un catálogo pequeño, cosas que sirven.</span><span>PRODUCTOS · 2026</span></footer>
     </main>
-    <script src="/app.js" defer></script>
+    <script src="./config.js"></script>
+    <script src="./app.js" defer></script>
   </body>
 </html>

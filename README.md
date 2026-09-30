@@ -25,22 +25,29 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Catálogo web
+## Arquitectura y despliegue
 
-La aplicación sirve una interfaz web en `http://localhost:5000`. El navegador llama a una API HTTP puente y esta consulta por gRPC al microservicio alojado en Railway (`sakura.proxy.rlwy.net:58842` por defecto); así se pueden probar desde la página la búsqueda, el listado y el filtro por precio del servicio.
+El proyecto se despliega como tres servicios independientes:
+
+- Frontend estático en GitHub Pages, servido desde `public/`.
+- Gateway REST NestJS en Render, iniciado con `npm run start:prod`.
+- Microservicio gRPC NestJS en Railway, iniciado con `npm run start:grpc:prod` y expuesto mediante TCP Proxy.
+
+### Variables y configuración
+
+- Railway: configura `GRPC_PORT=5001` y el TCP Proxy hacia el puerto interno `5001`. `railway.json` selecciona el entrypoint gRPC.
+- Render: configura `GRPC_URL` como `reseau.proxy.rlwy.net:34929` (host y puerto TCP, sin `https://`) y `FRONTEND_ORIGIN` como el origen de GitHub Pages, por ejemplo `https://usuario.github.io`.
+- GitHub: crea la variable de Actions `API_BASE_URL` con la URL HTTPS del gateway Render, por ejemplo `https://productos-api-gateway.onrender.com`. El workflow publica `public/` y genera `config.js` con esa URL.
+- GitHub Pages: en Settings → Pages, selecciona GitHub Actions como fuente de publicación.
+
+### Ejecución local
 
 ```bash
 npm install
 npm run start:dev
 ```
 
-Rutas HTTP disponibles:
-
-- `GET /api/productos` lista los productos.
-- `GET /api/productos?precioMaximo=50` filtra por precio máximo.
-- `GET /api/productos/1` consulta un producto por ID.
-
-`GRPC_URL` permite cambiar el endpoint gRPC, por ejemplo `localhost:5001` para desarrollo completamente local. `PORT` configura el servidor web y `GRPC_PORT` configura el servidor gRPC local que también inicia esta aplicación. En Railway, el puerto público `58842` es el proxy TCP hacia el puerto interno `8080` del servicio gRPC existente.
+Rutas del gateway: `GET /api/productos`, `GET /api/productos?precioMaximo=50` y `GET /api/productos/1`. Define `GRPC_URL` para cambiar el destino remoto. Para ejecutar el servidor gRPC localmente, compila y usa `npm run start:grpc:prod`.
 
 ## Project setup
 

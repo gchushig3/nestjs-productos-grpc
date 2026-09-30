@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: productos-api-gateway
+    runtime: node
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: GRPC_URL
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false

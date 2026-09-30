@@ -9,13 +9,14 @@ let activeLimit = '';
 
 const money = new Intl.NumberFormat('es-EC', { style: 'currency', currency: 'USD' });
 const icons = ['⌨', '◉', '▣', '✦'];
+const apiBaseUrl = (window.API_BASE_URL || '').replace(/\/+$/, '');
 
 async function loadProducts() {
   productsElement.innerHTML = '<p class="empty">Cargando productos…</p>';
   messageElement.textContent = '';
   const query = activeLimit ? `?precioMaximo=${encodeURIComponent(activeLimit)}` : '';
   try {
-    const response = await fetch(`/api/productos${query}`);
+    const response = await fetch(`${apiBaseUrl}/api/productos${query}`);
     const result = await response.json();
     if (!response.ok) throw new Error(result.message || 'No se pudieron cargar los productos.');
     products = result;

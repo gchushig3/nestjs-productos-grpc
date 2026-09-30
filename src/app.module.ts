@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import * as grpc from '@grpc/grpc-js';
 import { ProductosHttpController } from './productos-http.controller.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -17,12 +16,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
         options: {
           package: 'productos',
           protoPath: join(__dirname, 'productos.proto'),
-          url: process.env.GRPC_URL ?? 'sakura.proxy.rlwy.net:58842',
+          url: process.env.GRPC_URL || 'reseau.proxy.rlwy.net:34929',
+          credentials: grpc.credentials.createInsecure(),
         },
       },
     ]),
   ],
-  controllers: [AppController, ProductosHttpController],
-  providers: [AppService],
+  controllers: [ProductosHttpController],
 })
 export class AppModule {}
