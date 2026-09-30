@@ -43,6 +43,6 @@ describe('AppController', () => {
 
     expect(products).toHaveLength(3);
     expect(products[0]).toMatchObject({ id: 1, nombre: 'Teclado mecánico', precio: 45.9 });
-    expect(products[2]).toMatchObject({ id: 3, nombre: 'Monitor 24"', precio: 129.99 });
+    expect(products[2]).toMatchObject({ id: 3, nombre: 'Monitor 24 XL"', precio: 129.99 });
   });
 });
