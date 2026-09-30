@@ -3,8 +3,6 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { AppModule } from './app.module.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const frontendOrigins = process.env.FRONTEND_ORIGIN?.split(',').map((origin) => origin.trim()).filter(Boolean);
